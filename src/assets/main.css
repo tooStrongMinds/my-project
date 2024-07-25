@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 .text-style {
-    @apply text-2xl tracking-tight font-light
+    @apply text-2xl tracking-tight font-light font-customFont
 }
