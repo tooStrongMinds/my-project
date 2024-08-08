@@ -12,20 +12,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="mt-20">
+  <header>
     <div class="trending">
-    <h1 class="text-style">Trending</h1>
-    <div>
+    <h1 class="text-style mb-3">Trending</h1>
+    <div class="flex flex-row overflow-y-auto scrollbar-custom">
       <ShowCard 
-      v-for="show in store.trendingShows" :key="show.id"
-      :show="show"/>
+      v-for="show in store.trendingShows.slice(0, 10)" :key="show.id"
+      :show="show"
+      :isTrending="true"/>
     </div>
     </div>
-    <!-- <div class="recommended">
-    <h1 class="text-style">Recommended for you</h1>
-    <div>
-      <ShowCard />
+    <div class="recommended mt-5">
+    <h1 class="text-style mb-3">Recommended for you</h1>
+    <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 mt-4">
+      <ShowCard v-for="show in store.recommendedShows" :key="show.id" :show="show"
+      :isTrending="false"/>
     </div>
-    </div> -->
+    </div>
   </header>
 </template>

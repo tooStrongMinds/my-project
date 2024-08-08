@@ -1,8 +1,8 @@
 <template>
-    <div class="movies mt-20">
-      <h1 class="text-style">TV Series</h1>
+    <div>
+      <h1 class="text-style mb-3">TV Series</h1>
   
-      <div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
         <ShowCard v-for="show in store.shows" :key="show.id" :show="show" />
       </div>
     </div>

@@ -13,10 +13,25 @@ export default {
         'customFont': ['Outfit', 'sans-serif']
       },
       colors: {
-        'textHover': '#5a698f'
+        'textHover': '#5a698f',
+        'redHover': '#fc4747'
+      },
+      scrollbar: {
+        width: '4px',
+        height: '4px',
+        thumb: {
+          borderRadius: '10px',
+          backgroundColor: '#fc4747',
+          borderWidth: '2px',
+        },
+        track: {
+          backgroundColor: '#161d2f'
+        }
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
 }
 

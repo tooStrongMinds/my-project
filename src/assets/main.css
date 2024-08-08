@@ -7,3 +7,19 @@
 .text-style {
     @apply text-2xl tracking-tight font-light font-customFont
 }
+
+.scrollbar-custom::-webkit-scrollbar {
+    width: 1px;
+    height: 5px;
+   
+}
+.scrollbar-custom::-webkit-scrollbar-track {
+    background: #161d2f;
+    border-radius: 5px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #fc4747;
+    border-radius: 5px;
+    cursor: pointer;
+  }
