@@ -9,13 +9,13 @@ import displayPic from '@/assets/display.jpg'
   <main>
     <header class="bg-semiDarkBlue flex" id="app-head">
       <div class="flex items-center justify-between p-5 w-11/12 m-auto" id="head">
-        <img :src="logo" alt="App Logo" class="max-w-full w-8">
+        <router-link to="/"><img :src="logo" alt="App Logo" class="max-w-full w-8"></router-link>
         <NavBar />
         <img :src="displayPic" alt="User Display picture" class="w-8 rounded-full border border-white">
       </div>
     </header>
 
-    <div class="w-11/12 m-auto mt-6 lg:ml-28">
+    <div class="w-11/12 m-auto mt-3 lg:ml-28">
       <RouterView />
     </div>
   </main>

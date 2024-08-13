@@ -23,3 +23,9 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+
+  .background-hover:hover {
+    background-color: white;
+    opacity: 1;
+  }

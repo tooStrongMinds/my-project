@@ -7,11 +7,19 @@ export const useShowStore = defineStore("show", {
     // show: {},
     trendingShows: [],
     recommendedShows: [],
+    searchedShows: [],
+    searchMovieQuery: '',
+    searchSeriesQuery: '',
+    currentPage: 1,
+    bookmarks: JSON.parse(localStorage.getItem('bookmarks')) || [],
+    // bookmarkedSeries: JSON.parse(localStorage.getItem(bookmarkedSeries)) || [],
+    // totalPages: 1,
+    // isAllShowsLoaded: false,
   }),
   actions: {
     async getMovies() {
       try {
-        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=b5549b7208a29cf5e4d8e62819aa403e`)
+        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=b5549b7208a29cf5e4d8e62819aa403e&page=${this.currentPage}`)
         this.shows = response.data.results
       } catch (error) {
         console.log(error);
@@ -19,7 +27,7 @@ export const useShowStore = defineStore("show", {
     },
     async getSeries() {
       try {
-        const response = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=b5549b7208a29cf5e4d8e62819aa403e`)
+        const response = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=b5549b7208a29cf5e4d8e62819aa403e&page=${this.currentPage}`)
         this.shows = response.data.results
       } catch (error) {
         console.log(error);
@@ -31,7 +39,6 @@ export const useShowStore = defineStore("show", {
           `https://api.themoviedb.org/3/trending/all/day?api_key=b5549b7208a29cf5e4d8e62819aa403e`
         );
         this.trendingShows = response.data.results;
-        console.log(this.trendingShows);
       } catch (error) {
         console.log(error);
       }
@@ -67,11 +74,53 @@ export const useShowStore = defineStore("show", {
 
         // Ensure we don't exceed the limit
         this.recommendedShows = interleaved.slice(0, limit);
-        console.log(this.recommendedShows);
       } catch (error) {
         console.log('Error fetching recommended shows', error.message);
       }
     },
-  },
+    async fetchSearchSeriesResults() {
+      if (this.searchSeriesQuery.trim() === "") {
+        this.searchedShows = []
+        return
+      }
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/search/tv?query=${this.searchSeriesQuery}&api_key=b5549b7208a29cf5e4d8e62819aa403e`
+        );
+        this.searchedShows = response.data.results;
+      } catch(error) {
+        console.log('Error fetching results', error.message)
+      }
+    },
+    async fetchSearchMovieResults() {
+      if (this.searchMovieQuery.trim() === "") {
+        this.searchedShows = []
+        return
+      }
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/search/movie?query=${this.searchMovieQuery}&api_key=b5549b7208a29cf5e4d8e62819aa403e`
+        );
+        this.searchedShows = response.data.results;
+      } catch(error) {
+        console.log('Error fetching results', error.message)
+      }
+    },
+    // toggleBookmark(show) {
+    //   const index = this.bookmarks.findIndex((bookmark) => bookmark.id === show.id);
+    //   if (index !== -1) {
+    //     // If show is already bookmarked, remove it
+    //     this.bookmarks.splice(index, 1);
+    //   } else {
+    //     // Otherwise, add it to the bookmarks
+    //     this.bookmarks.push(show);
+    //   }
+    //   // Update local storage
+    //   localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks));
+    // },
+    // isBookmarked(id) {
+    //   return this.bookmarks.some((bookmark) => bookmark.id === id);
+    // },
+},
   getters: {},
 });
