@@ -12,14 +12,14 @@
     <div class="mb-4" v-if="!store.searchSeriesQuery">
       <h1 class="text-style mb-3">TV Series</h1>
   
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-1">
         <ShowCard v-for="show in store.shows" :key="show.id" :show="show" />
       </div>
       <button v-if="!store.searchSeriesQuery && !store.isAllSeriesLoaded" @click="loadMore" class="bg-redHover p-2 rounded-lg">Load More</button>
     </div>
     <div v-else>
     <h1 class="text-style mb-3">Search results for "{{ store.searchSeriesQuery }}"</h1>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-1">
       <ShowCard v-for="show in store.searchedShows" :key="show.id" :show="show"/>
     </div>
   </div>

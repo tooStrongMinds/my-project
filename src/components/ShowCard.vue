@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div v-if="show && isTrending" class="relative m-1 w-60">
+      <div v-if="show && isTrending" class="relative m-1 w-60 lg:w-80">
         <div class="relative mb-5">
           <img
             v-if="show.backdrop_path || show.poster_path"
@@ -10,9 +10,11 @@
           />
           <div class="absolute inset-0 bg-black bg-opacity-35 flex items-end justify-center rounded-xl w-11/12">
             <div class="w-11/12 p-2">
+              <div class="flex gap-1">
+                <p class="font-light text-sm">{{ show.release_date || show.first_air_date }}</p> &#xb7;
+                <p class="font-light uppercase text-sm">{{ show.media_type }}</p>
+              </div>
               <h2 class="font-bold text-lg">{{ show.original_title || show.original_name }}</h2>
-              <p class="font-light">{{ show.release_date || show.first_air_date }}</p>
-              <p class="font-light">{{ show.media_type }}</p>
             </div>
             <div class="self-start mx-3 my-2  cursor-pointer relative " >
               <div class="bg-darkBlue w-8 h-8 rounded-full opacity-70  "></div>
@@ -30,7 +32,7 @@
               alt="Movie Poster"
               class="max-w-full w-11/12 h-auto rounded-xl"
             />
-            <div class="absolute inset-0 flex items-start justify-end mx-10 my-2 cursor-pointer" >
+            <div class="absolute inset-0 flex items-start justify-end mx-20 my-2 cursor-pointer lg:mx-10" >
               <div class="relative">
                 <div class="bg-darkBlue opacity-70 w-10 h-10 rounded-full "></div>
                 <i 
@@ -68,7 +70,6 @@ const props = defineProps({
 const store = useShowStore()
 
 // onMounted(() => {
-//   store.toggleBookmark()
 //   store.isBookmarked()
 // })
 

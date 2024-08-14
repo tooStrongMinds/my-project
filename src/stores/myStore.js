@@ -4,7 +4,6 @@ import axios from "axios";
 export const useShowStore = defineStore("show", {
   state: () => ({
     shows: [],
-    // show: {},
     trendingShows: [],
     recommendedShows: [],
     searchedShows: [],
@@ -13,8 +12,6 @@ export const useShowStore = defineStore("show", {
     currentPage: 1,
     bookmarks: JSON.parse(localStorage.getItem('bookmarks')) || [],
     // bookmarkedSeries: JSON.parse(localStorage.getItem(bookmarkedSeries)) || [],
-    // totalPages: 1,
-    // isAllShowsLoaded: false,
   }),
   actions: {
     async getMovies() {
@@ -74,6 +71,7 @@ export const useShowStore = defineStore("show", {
 
         // Ensure we don't exceed the limit
         this.recommendedShows = interleaved.slice(0, limit);
+        console.log(this.recommendedShows)
       } catch (error) {
         console.log('Error fetching recommended shows', error.message);
       }
@@ -121,6 +119,7 @@ export const useShowStore = defineStore("show", {
     // isBookmarked(id) {
     //   return this.bookmarks.some((bookmark) => bookmark.id === id);
     // },
+     
 },
   getters: {},
 });
