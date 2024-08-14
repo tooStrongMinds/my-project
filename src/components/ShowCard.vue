@@ -16,9 +16,14 @@
               </div>
               <h2 class="font-bold text-lg">{{ show.original_title || show.original_name }}</h2>
             </div>
-            <div class="self-start mx-3 my-2  cursor-pointer relative " >
+            <div class="self-start mx-3 my-2  cursor-pointer relative " @click="toggleLibrary" >
               <div class="bg-darkBlue w-8 h-8 rounded-full opacity-70  "></div>
-              <i class="fa-regular fa-bookmark absolute inset-0 flex items-center justify-center hover:text-black hover:bg-white hover:opacity-100 rounded-full transition duration-300"></i>
+              <i 
+              :class="{
+                  'fa-regular fa-bookmark' : !store.isBookmarked(show),
+                  'fa-solid fa-bookmark' : store.isBookmarked(show)
+                }"
+              class="absolute inset-0 flex items-center justify-center hover:text-black hover:bg-white hover:opacity-100 rounded-full transition duration-300"></i>
             </div>
           </div>
         </div>
@@ -32,12 +37,12 @@
               alt="Movie Poster"
               class="max-w-full w-11/12 h-auto rounded-xl"
             />
-            <div class="absolute inset-0 flex items-start justify-end mx-10 my-2 cursor-pointer" @click="toggleLibrary" >
-              <div class="relative" >
+            <div class="absolute inset-0 flex items-start justify-end mx-10 my-2 "  >
+              <div class="relative cursor-pointer" @click="toggleLibrary" >
                 <div class="bg-darkBlue opacity-70 w-10 h-10 rounded-full "></div>
                 <i :class="{
-                  'fa-regular fa-bookmark' : !show.isBookmarked,
-                  'fa-solid fa-bookmark' : show.isBookmarked
+                  'fa-regular fa-bookmark' : !store.isBookmarked(show),
+                  'fa-solid fa-bookmark' : store.isBookmarked(show)
                 }"
                 
                 class=" absolute inset-0 flex items-center justify-center hover:bg-white hover:text-black rounded-full transition duration-300"></i>
@@ -46,9 +51,11 @@
           </span>
           <div class="rounded-xl w-11/12">
             <div class="w-11/12 p-2">
+              <span class="flex gap-1">
+                <p class="font-light text-sm">{{ show.release_date || show.first_air_date }}</p> &#xb7;
+                <p class="font-light uppercase text-sm">{{ show.media_type }}</p>
+              </span>
               <h2 class="font-bold text-lg">{{ show.original_title || show.original_name }}</h2>
-              <p class="font-light">{{ show.release_date || show.first_air_date }}</p>
-              <p class="font-light">{{ show.media_type }}</p>
             </div>
           </div>
         </div>
