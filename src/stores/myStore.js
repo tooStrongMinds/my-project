@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
+
 export const useShowStore = defineStore("show", {
   state: () => ({
     shows: [],
@@ -11,7 +12,8 @@ export const useShowStore = defineStore("show", {
     searchSeriesQuery: '',
     currentPage: 1,
     bookmarks: JSON.parse(localStorage.getItem('bookmarks')) || [],
-    // bookmarkedSeries: JSON.parse(localStorage.getItem(bookmarkedSeries)) || [],
+    isBookmarked: false,
+    
   }),
   actions: {
     async getMovies() {
@@ -104,22 +106,53 @@ export const useShowStore = defineStore("show", {
         console.log('Error fetching results', error.message)
       }
     },
-    // toggleBookmark(show) {
-    //   const index = this.bookmarks.findIndex((bookmark) => bookmark.id === show.id);
-    //   if (index !== -1) {
-    //     // If show is already bookmarked, remove it
-    //     this.bookmarks.splice(index, 1);
-    //   } else {
-    //     // Otherwise, add it to the bookmarks
-    //     this.bookmarks.push(show);
+    
+    // toggleBookmarked(show) {
+    //   try {
+
+    //     if (!show || typeof show.id === 'undefined') {
+    //       console.error('Invalid show object:', show);
+    //       return;
+    //     }
+    
+    //     const index = this.bookmarks.findIndex(b => b && b.id === show.id)
+    //     if (index !== -1) {
+    //       this.bookmarks.splice(index, 1)
+    //       } else {
+    //         this.bookmarks.push(show);
+    //       } 
+    //     localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks));
+    //     console.log(this.bookmarks)
+    //   } catch(error) {
+    //     console.log(error.message)
     //   }
-    //   // Update local storage
-    //   localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks));
-    // },
-    // isBookmarked(id) {
-    //   return this.bookmarks.some((bookmark) => bookmark.id === id);
-    // },
-     
+    // }
+
+    toggleBookmarked(show) {
+      try {
+        console.log('Show object:', show);
+        if (!show || typeof show.id === 'undefined') {
+          console.error('Invalid show object:', show);
+          return;
+        }
+  
+        const index = this.bookmarks.findIndex(b => b && b.id === show.id);
+        console.log('Bookmark index:', index);
+        if (index > -1) {
+          this.bookmarks.splice(index, 1);
+          show.isBookmarked = false
+        } else {
+          this.bookmarks.push(show);
+          show.isBookmarked = true
+        }
+  
+        localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks));
+        console.log('Updated bookmarks:', this.bookmarks);
+      } catch (error) {
+        console.log('Error:', error.message);
+      }
+    }
+    
 },
   getters: {},
 });

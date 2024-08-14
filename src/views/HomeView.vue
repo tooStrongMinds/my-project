@@ -24,7 +24,7 @@ onMounted(() => {
     </div>
     <div class="recommended mt-5">
     <h1 class="text-style mb-3">Recommended for you</h1>
-    <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 mt-4">
+    <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 mt-4">
       <ShowCard v-for="show in store.recommendedShows" :key="show.id" :show="show"
       :isTrending="false"/>
     </div>

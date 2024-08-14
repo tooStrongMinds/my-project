@@ -32,12 +32,15 @@
               alt="Movie Poster"
               class="max-w-full w-11/12 h-auto rounded-xl"
             />
-            <div class="absolute inset-0 flex items-start justify-end mx-10 my-2 cursor-pointer" >
-              <div class="relative">
+            <div class="absolute inset-0 flex items-start justify-end mx-10 my-2 cursor-pointer" @click="toggleLibrary" >
+              <div class="relative" >
                 <div class="bg-darkBlue opacity-70 w-10 h-10 rounded-full "></div>
-                <i 
+                <i :class="{
+                  'fa-regular fa-bookmark' : !show.isBookmarked,
+                  'fa-solid fa-bookmark' : show.isBookmarked
+                }"
                 
-                class="fa-regular fa-bookmark absolute inset-0 flex items-center justify-center hover:bg-white hover:text-black rounded-full transition duration-300"></i>
+                class=" absolute inset-0 flex items-center justify-center hover:bg-white hover:text-black rounded-full transition duration-300"></i>
               </div>
             </div>
           </span>
@@ -69,10 +72,9 @@ const props = defineProps({
 });
 const store = useShowStore()
 
-// onMounted(() => {
-//   store.isBookmarked()
-// })
-
+function toggleLibrary() {
+  store.toggleBookmarked(props.show)
+}
 </script>
 
 <style>
