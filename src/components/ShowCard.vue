@@ -32,7 +32,7 @@
               alt="Movie Poster"
               class="max-w-full w-11/12 h-auto rounded-xl"
             />
-            <div class="absolute inset-0 flex items-start justify-end mx-20 my-2 cursor-pointer lg:mx-10" >
+            <div class="absolute inset-0 flex items-start justify-end mx-10 my-2 cursor-pointer" >
               <div class="relative">
                 <div class="bg-darkBlue opacity-70 w-10 h-10 rounded-full "></div>
                 <i 
