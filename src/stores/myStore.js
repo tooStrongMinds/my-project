@@ -14,8 +14,8 @@ export const useShowStore = defineStore("show", {
     showOverlay: null,
     bookmarks: JSON.parse(localStorage.getItem('bookmarks')) || [],
     videos: [],
-    loading: false,
-    error: null, 
+    // loading: false,
+    // error: null, 
   }),
   actions: {
     async getMovies() {
@@ -137,17 +137,13 @@ export const useShowStore = defineStore("show", {
     isBookmarked(show) {
       return this.bookmarks.some(b => b && b.id === show.id);
     },
-    async fetchVideos(show) {
-      this.loading = true
-      this.error = null
+    async fetchVideos(movieID) {
       try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/533535/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`)
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`)
 
         this.videos = response.data.results
       } catch (error) {
-        this.error = error;
-      } finally {
-        this.loading = false;
+        console.log(error.message)
       }
     }
 },

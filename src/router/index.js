@@ -29,7 +29,7 @@ const router = createRouter({
       component: Bookmarked
     },
     {
-      path: '/videos',
+      path: '/videos/:id',
       name: 'videos',
       component: Videos
     },
