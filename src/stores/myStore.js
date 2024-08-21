@@ -11,8 +11,11 @@ export const useShowStore = defineStore("show", {
     searchMovieQuery: '',
     searchSeriesQuery: '',
     currentPage: 1,
+    showOverlay: null,
     bookmarks: JSON.parse(localStorage.getItem('bookmarks')) || [],
-    bookmarkedMovies: JSON.parse(localStorage.getItem('bookmarkedMovies')) || [],   
+    videos: [],
+    loading: false,
+    error: null, 
   }),
   actions: {
     async getMovies() {
@@ -37,6 +40,7 @@ export const useShowStore = defineStore("show", {
           `https://api.themoviedb.org/3/trending/all/day?api_key=b5549b7208a29cf5e4d8e62819aa403e`
         );
         this.trendingShows = response.data.results;
+        console.log(this.trendingShows)
       } catch (error) {
         console.log(error);
       }
@@ -133,6 +137,19 @@ export const useShowStore = defineStore("show", {
     isBookmarked(show) {
       return this.bookmarks.some(b => b && b.id === show.id);
     },
+    async fetchVideos(show) {
+      this.loading = true
+      this.error = null
+      try {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/533535/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`)
+
+        this.videos = response.data.results
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.loading = false;
+      }
+    }
 },
   getters: {},
 });

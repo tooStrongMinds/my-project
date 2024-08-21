@@ -10,17 +10,11 @@
       />
     </span>
   <section>
-    <h1 class="text-style mb-3">Bookmarked Movies</h1>
+    <h1 class="text-style mb-3">Bookmarked Shows</h1>
     <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 mt-4">
       <ShowCard v-for="show in store.bookmarks" :key="show.id" :show="show"/>
     </div>
   </section>
-  <!-- <section>
-    <h1 class="text-style mb-3">Bookmarked Series</h1>
-    <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 mt-4">
-      <ShowCard v-for="show in store.bookmarkedSeries" :key="show.id" :show="show"/>
-    </div>
-  </section> -->
 </template>
 
 <script setup>

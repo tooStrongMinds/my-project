@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Movie from '../views/Movies.vue'
 import TvSeries from '../views/TvSeries.vue'
 import Bookmarked from '../views/Bookmarked.vue'
+import Videos from '../views/Videos.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +27,12 @@ const router = createRouter({
       path: '/bookmarked',
       name: 'bookmarked',
       component: Bookmarked
-    }
+    },
+    {
+      path: '/videos',
+      name: 'videos',
+      component: Videos
+    },
   ]
 })
 
