@@ -40,7 +40,6 @@ export const useShowStore = defineStore("show", {
           `https://api.themoviedb.org/3/trending/all/day?api_key=b5549b7208a29cf5e4d8e62819aa403e`
         );
         this.trendingShows = response.data.results;
-        console.log(this.trendingShows)
       } catch (error) {
         console.log(error);
       }
@@ -76,7 +75,6 @@ export const useShowStore = defineStore("show", {
 
         // Ensure we don't exceed the limit
         this.recommendedShows = interleaved.slice(0, limit);
-        console.log(this.recommendedShows)
       } catch (error) {
         console.log('Error fetching recommended shows', error.message);
       }
@@ -137,15 +135,19 @@ export const useShowStore = defineStore("show", {
     isBookmarked(show) {
       return this.bookmarks.some(b => b && b.id === show.id);
     },
-    async fetchVideos(movieID) {
+    async fetchVideos(id, mediaType) {
       try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`)
-
-        this.videos = response.data.results
+        const endpoint = mediaType === 'movie' 
+          ? `https://api.themoviedb.org/3/movie/${id}/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`
+          : `https://api.themoviedb.org/3/tv/${id}/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`;
+    
+        const response = await axios.get(endpoint);
+        this.videos = response.data.results;
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
       }
-    }
+    },
+    
 },
   getters: {},
 });

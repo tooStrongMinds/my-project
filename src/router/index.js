@@ -29,9 +29,16 @@ const router = createRouter({
       component: Bookmarked
     },
     {
-      path: '/videos/:id',
-      name: 'videos',
-      component: Videos
+      path: "/movies/:id", 
+      name: "MoviePlayer", 
+      component: Videos,  // Reuse the same component
+      props: { mediaType: 'movie' }
+    },
+    {
+      path: "/tvseries/:id", 
+      name: "TvPlayer", 
+      component: Videos,  // Reuse the same component
+      props: { mediaType: 'tv' }
     },
   ]
 })

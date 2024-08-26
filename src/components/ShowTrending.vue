@@ -12,7 +12,7 @@
           alt="Movie Poster"
           class="max-w-full w-11/12 h-auto rounded-xl"
         />
-        <router-link :to="{ name: 'videos', params: { id: show.id } }">
+        <router-link :to="getRouteLink(show)">
           <div
             v-if="store.showOverlay === show.id"
             class="absolute inset-0 flex items-center z-50 w-fit m-auto"
@@ -78,5 +78,14 @@ const store = useShowStore();
 
 function toggleLibrary() {
   store.toggleBookmarked(props.show);
+}
+
+function getRouteLink(show) {
+  // Check if it's a movie or a TV show and return the appropriate route
+  if (show.media_type === 'movie' || show.title) {
+    return { name: 'MoviePlayer', params: { id: show.id } };
+  } else if (show.media_type === 'tv' || show.original_name) {
+    return { name: 'TvPlayer', params: { id: show.id } };
+  }
 }
 </script>
