@@ -1,5 +1,5 @@
 <template>
-  <div v-if="video && showDetails" class="mt-6 lg:flex lg:gap-5">
+  <div v-if="video && showDetails" class="mt-6 lg:flex lg:gap-5 mb-3">
     <div class="lg:w-full">
       <div class="lg:flex lg:flex-col-reverse">
         <iframe
@@ -46,25 +46,43 @@
       </div>
       
       <p class="text-xl font-extralight text-gray-400">{{ showDetails.overview }}</p>
-      <div class="mt-2 flex gap-2">
-        <p class="font-light">
-          <span class="mr-2">Genre:</span
-          >{{ showDetails.genres.map((genre) => genre.name).join(", ") }}
-        </p> 
-        <div class="flex gap-3 font-light" v-if="mediaType === 'tv'">
-          |
-          <span class="flex gap-2">
-            <p><span class="mr-1">Seasons:</span>{{ showDetails.number_of_seasons }}</p> 
-            <p><span class="mr-1">Episodes:</span>{{ showDetails.number_of_episodes }}</p>
-          </span> |
-          <div v-if="showDetails.in_production === false">
-            <p>Status: Completed</p>
-          </div>
-          <div v-else>
-            <p>Status: Ongoing</p>
-          </div>
-        </div>
-      </div>
+      <div class="mt-2 md:flex md:gap-2">
+  <!-- Genre -->
+  <p class="font-light">
+    <span class="md:mr-2 mr-1">Genre:</span>
+    {{ showDetails.genres.map((genre) => genre.name).join(", ") }}
+  </p>
+
+  <!-- Divider for larger screens -->
+  <span class="hidden md:inline">|</span>
+
+  <!-- TV show details (Seasons, Episodes, Status) -->
+  <div class="md:flex md:gap-3 font-light" v-if="mediaType === 'tv'">
+    <span class="flex gap-2">
+      
+      <!-- Seasons -->
+      <p><span class="mr-1">Seasons:</span>{{ showDetails.number_of_seasons }}</p>
+      
+      <!-- Divider for smaller screens -->
+      <span class="inline md:hidden">|</span>
+      
+      <!-- Episodes -->
+      <p><span class="mr-1">Episodes:</span>{{ showDetails.number_of_episodes }}</p>
+    </span>
+
+    <!-- Divider for larger screens -->
+    <span class="hidden md:inline">|</span>
+    
+    <!-- Status -->
+    <div v-if="showDetails.in_production === false">
+      <p>Status: Completed</p>
+    </div>
+    <div v-else>
+      <p>Status: Ongoing</p>
+    </div>
+  </div>
+</div>
+
       
     </div>
   </div>
