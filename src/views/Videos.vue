@@ -9,7 +9,7 @@
           allowfullscreen
           class="w-full h-96 m-auto"
         ></iframe>
-        <h1 class="text-style mb-3 !text-3xl lg:text-center">
+        <h1 class="text-style mb-3 lg:!text-3xl lg:text-center mt-2">
           {{ showDetails.original_title || showDetails.original_name }} |
           {{ video.name }}
         </h1>
@@ -54,10 +54,11 @@
   </p>
 
   <!-- Divider for larger screens -->
-  <span class="hidden md:inline">|</span>
-
+  
   <!-- TV show details (Seasons, Episodes, Status) -->
   <div class="md:flex md:gap-3 font-light" v-if="mediaType === 'tv'">
+    <span class="hidden md:inline">|</span>
+    
     <span class="flex gap-2">
       
       <!-- Seasons -->
