@@ -1,5 +1,5 @@
 <template>
-  <div v-if="video && showDetails" class="mt-6 lg:flex ">
+  <div v-if="video && showDetails" class="mt-6 lg:flex lg:gap-5">
     <div class="lg:w-full">
       <div class="lg:flex lg:flex-col-reverse">
         <iframe
@@ -14,48 +14,56 @@
           {{ video.name }}
         </h1>
       </div>
-      <div class="cursor-pointer">
+      <div class="cursor-pointer mt-5">
         <div class="flex justify-around items-center">
           <div class="flex flex-col items-center  text-center" @click="toggleLibrary(showDetails)">
             <i :class="{
-                      'fa-solid fa-heart-circle-plus text-redHover' : !store.isBookmarked(showDetails),
-                      'fa-solid fa-heart-circle-minus' : store.isBookmarked(showDetails)
+                      'fa-solid fa-heart-circle-plus' : !store.isBookmarked(showDetails),
+                      'fa-solid fa-heart-circle-minus text-redHover' : store.isBookmarked(showDetails)
                     }"
                     class=" text-2xl"
                     ></i>
-                    <p class="text-sm text-textHover">Save to Watchlist</p>
+                    <p class="text-sm text-gray-400 font-light">Save to Watchlist</p>
           </div>
           <div class="flex flex-col items-center">
-            <i class="fa-solid fa-share text-2xl"></i>
-            <p class="text-sm text-textHover">Share</p>
+            <i class="fa-solid fa-share text-2xl "></i>
+            <p class="text-sm text-gray-400 font-light">Share</p>
           </div>
           <div class="flex flex-col items-center">
             <i class="fa-solid fa-download text-2xl"></i>
-            <p class="text-sm text-textHover">Download</p>
+            <p class="text-sm text-gray-400 font-light">Download</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="w-1 max-h-full h-auto bg-white"></div>
+    <div class="w-0.5 max-h-full h-auto bg-gray-400"></div>
 
-    <div class="mt-4 lg:w-10/12 lg:mt-0 lg:px-4">
-      <h2 class="text-style !font-medium uppercase">Description</h2>
-      <p class="text-xl font-light">{{ showDetails.overview }}</p>
-      <p>
-        <span>GENRE:</span
-        >{{ showDetails.genres.map((genre) => genre.name).join(", ") }}
-      </p>
+    <div class="mt-4 lg:w-10/12 lg:mt-0  lg:self-center lg:flex lg:flex-col lg:gap-3">
+      <div class="flex gap-3 items-center">
+        <span v-if="video.size === 1080" class="bg-semiDarkBlue p-1 rounded-lg">HD</span>
+        <span class="bg-semiDarkBlue p-1 rounded-lg">{{ getYear(showDetails.release_date || showDetails.first_air_date) }}</span>
 
-      <span class="flex gap-2">
-        <p><span>Seasons:</span>{{ showDetails.number_of_seasons }}</p>
-        <p><span>Episodes:</span>{{ showDetails.number_of_episodes }}</p>
-      </span>
-
-      <div v-if="showDetails.in_production === false">
-        <p>Status: Completed</p>
       </div>
-      <div v-else>
-        <p>Status: Ongoing</p>
+      
+      <p class="text-xl font-extralight text-gray-400">{{ showDetails.overview }}</p>
+      <div class="mt-2 flex gap-2">
+        <p class="font-light">
+          <span class="mr-2">Genre:</span
+          >{{ showDetails.genres.map((genre) => genre.name).join(", ") }}
+        </p> 
+        <div class="flex gap-3 font-light" v-if="mediaType === 'tv'">
+          |
+          <span class="flex gap-2">
+            <p><span class="mr-1">Seasons:</span>{{ showDetails.number_of_seasons }}</p> 
+            <p><span class="mr-1">Episodes:</span>{{ showDetails.number_of_episodes }}</p>
+          </span> |
+          <div v-if="showDetails.in_production === false">
+            <p>Status: Completed</p>
+          </div>
+          <div v-else>
+            <p>Status: Ongoing</p>
+          </div>
+        </div>
       </div>
       
     </div>
@@ -109,5 +117,9 @@ onMounted(async () => {
 });
 function toggleLibrary(showDetails) {
 store.toggleBookmarked(showDetails)
+}
+function getYear(dateString) {
+  if (!dateString) return ''; // Handle cases where the date is undefined or null
+  return dateString.split('-')[0]; // Split the date by '-' and return the first part (year)
 }
 </script>
