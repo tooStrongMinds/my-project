@@ -147,6 +147,20 @@ export const useShowStore = defineStore("show", {
         console.log(error.message);
       }
     },
+
+    async getSimilar(id, mediaType) {
+      try {
+        const endpoint = mediaType === "movie"
+          ? `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=b5549b7208a29cf5e4d8e62819aa403e`
+          : `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=b5549b7208a29cf5e4d8e62819aa403e`;
+    
+        const response = await axios.get(endpoint);
+        this.shows = response.data.results;
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    
     
 },
   getters: {},
