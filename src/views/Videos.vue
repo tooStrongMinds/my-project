@@ -99,6 +99,9 @@
       <Similar :id="showDetails.id" :mediaType="mediaType" />
     </div>
   </div>
+  <!-- <div v-else-if="">
+    <p>No video available</p>
+  </div> -->
   <div v-else class="mt-7">
     <p class="text-style mb-3">Loading video...</p>
   </div>
@@ -131,6 +134,7 @@ async function fetchData() {
     );
     showDetails.value = showDetailsResponse.data;
     console.log(showDetails);
+    console.log(video)
   } catch (error) {
     console.error("Error fetching show details:", error);
   }
