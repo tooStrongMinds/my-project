@@ -120,13 +120,10 @@ export const useShowStore = defineStore("show", {
         }
 
         const index = this.bookmarks.findIndex((b) => b && b.id === show.id);
-        console.log("Bookmark index:", index);
         if (index > -1) {
           this.bookmarks.splice(index, 1);
-          // show.isBookmarked = false
         } else {
           this.bookmarks.push(show);
-          // show.isBookmarked = true
         }
 
         localStorage.setItem("bookmarks", JSON.stringify(this.bookmarks));
@@ -171,7 +168,7 @@ export const useShowStore = defineStore("show", {
           `https://api.themoviedb.org/3/movie/upcoming?api_key=b5549b7208a29cf5e4d8e62819aa403e`
         );
         this.shows = response.data.results;
-        const minDate = "2024-08-01";
+        const minDate = "2024-07-01";
         const maxDate = response.data.dates.maximum;
         const filteredShows = this.shows.filter((show) => {
           const releaseDate = new Date(show.release_date);

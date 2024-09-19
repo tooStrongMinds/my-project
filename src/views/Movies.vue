@@ -3,7 +3,7 @@
       <i class="fa-solid fa-magnifying-glass text-xl"></i>
       <input
         type="search"
-        placeholder="Search by movies"
+        placeholder="Search Movies"
         v-model="store.searchMovieQuery"
         @input="store.fetchSearchMovieResults"
         class="bg-transparent outline-none p-3 font-customFont w-full text-lg focus:border-b focus:border-b-white"
