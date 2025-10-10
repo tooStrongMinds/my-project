@@ -20,7 +20,7 @@ export const useShowStore = defineStore("show", {
     async getMovies() {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/discover/movie?api_key=b5549b7208a29cf5e4d8e62819aa403e&page=${this.currentPage}`
+          `https://api.themoviedb.org/3/discover/movie?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb&page=${this.currentPage}`
         );
         this.shows = response.data.results;
       } catch (error) {
@@ -30,7 +30,7 @@ export const useShowStore = defineStore("show", {
     async getSeries() {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/discover/tv?api_key=b5549b7208a29cf5e4d8e62819aa403e&page=${this.currentPage}`
+          `https://api.themoviedb.org/3/discover/tv?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb&page=${this.currentPage}`
         );
         this.shows = response.data.results;
       } catch (error) {
@@ -40,7 +40,7 @@ export const useShowStore = defineStore("show", {
     async getTrendingShows() {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/trending/all/day?api_key=b5549b7208a29cf5e4d8e62819aa403e`
+          `https://api.themoviedb.org/3/trending/all/day?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`
         );
         this.trendingShows = response.data.results;
       } catch (error) {
@@ -48,8 +48,8 @@ export const useShowStore = defineStore("show", {
       }
     },
     async getRecommendedShows(limit = 20) {
-      const movieEndPoint = `https://api.themoviedb.org/3/movie/popular?api_key=b5549b7208a29cf5e4d8e62819aa403e`;
-      const tvEndPoint = `https://api.themoviedb.org/3/tv/popular?api_key=b5549b7208a29cf5e4d8e62819aa403e`;
+      const movieEndPoint = `https://api.themoviedb.org/3/movie/popular?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`;
+      const tvEndPoint = `https://api.themoviedb.org/3/tv/popular?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`;
 
       try {
         const [moviesResponse, tvResponse] = await Promise.all([
@@ -89,7 +89,7 @@ export const useShowStore = defineStore("show", {
       }
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/search/tv?query=${this.searchSeriesQuery}&api_key=b5549b7208a29cf5e4d8e62819aa403e`
+          `https://api.themoviedb.org/3/search/tv?query=${this.searchSeriesQuery}&api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`
         );
         this.searchedShows = response.data.results;
       } catch (error) {
@@ -103,7 +103,7 @@ export const useShowStore = defineStore("show", {
       }
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?query=${this.searchMovieQuery}&api_key=b5549b7208a29cf5e4d8e62819aa403e`
+          `https://api.themoviedb.org/3/search/movie?query=${this.searchMovieQuery}&api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`
         );
         this.searchedShows = response.data.results;
       } catch (error) {
@@ -139,8 +139,8 @@ export const useShowStore = defineStore("show", {
       try {
         const endpoint =
           mediaType === "movie"
-            ? `https://api.themoviedb.org/3/movie/${id}/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`
-            : `https://api.themoviedb.org/3/tv/${id}/videos?api_key=b5549b7208a29cf5e4d8e62819aa403e`;
+            ? `https://api.themoviedb.org/3/movie/${id}/videos?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`
+            : `https://api.themoviedb.org/3/tv/${id}/videos?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`;
 
         const response = await axios.get(endpoint);
         this.videos = response.data.results;
@@ -153,8 +153,8 @@ export const useShowStore = defineStore("show", {
       try {
         const endpoint =
           mediaType === "movie"
-            ? `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=b5549b7208a29cf5e4d8e62819aa403e`
-            : `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=b5549b7208a29cf5e4d8e62819aa403e`;
+            ? `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`
+            : `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`;
 
         const response = await axios.get(endpoint);
         this.shows = response.data.results;
@@ -165,7 +165,7 @@ export const useShowStore = defineStore("show", {
     async getUpcoming() {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/upcoming?api_key=b5549b7208a29cf5e4d8e62819aa403e`
+          `https://api.themoviedb.org/3/movie/upcoming?api_key=a41711e5bd28b67e74d1cd7d0b5be4eb`
         );
         this.shows = response.data.results;
         const minDate = "2024-07-01";
